@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 
 type PostSummary = {
   id: number
@@ -15,13 +15,11 @@ export function PostList({ posts }: Props) {
   const [query, setQuery] = useState('')
   const [favorites, setFavorites] = useState<number[]>([])
 
-  const filtered = useMemo(() => {
-    const keyword = query.trim().toLowerCase()
-    if (keyword === '') {
-      return posts
-    }
-    return posts.filter((post) => post.title.toLowerCase().includes(keyword))
-  }, [posts, query])
+  const keyword = query.trim().toLowerCase()
+  const filtered =
+    keyword === ''
+      ? posts
+      : posts.filter((post) => post.title.toLowerCase().includes(keyword))
 
   function toggleFavorite(id: number) {
     setFavorites((current) =>

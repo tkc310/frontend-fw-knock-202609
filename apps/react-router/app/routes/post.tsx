@@ -10,11 +10,11 @@ import {
 
 import type { Route } from './+types/post'
 
-export function meta({ data }: Route.MetaArgs) {
-  if (!data) {
+export function meta({ loaderData }: Route.MetaArgs) {
+  if (!loaderData) {
     return [{ title: '記事 | React Router' }]
   }
-  return [{ title: `${data.post.title} | React Router` }]
+  return [{ title: `${loaderData.post.title} | React Router` }]
 }
 
 export async function loader({ params }: Route.LoaderArgs) {

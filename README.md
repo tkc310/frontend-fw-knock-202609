@@ -43,5 +43,5 @@ cd apps/react-router && npm install && npm run dev
 詳細は各アプリの README を参照。
 
 - **TanStack Start**: `npm run dev` / `npm run build` は SSR。`npm run build:ssg`（`PRERENDER=1`）で prerender による静的出力。
-- **Astro**: 既定ビルドは SSG（`prerender` 既定 true）。`/live` だけ `prerender = false` で Node アダプタによる SSR。全ページ SSR は `npm run build:ssr`（`ASTRO_OUTPUT=server`）。
+- **Astro**: 既定ビルドは SSG（`/` と `/posts/:id` は `prerender = true`）。`/live` だけ `prerender = false` で Node アダプタによる SSR。`npm run build:ssr`（`ASTRO_OUTPUT=server`）はサーバー出力でも一覧・詳細は静的のまま。
 - **React Router**: 既定は SSR しつつ `prerender` で一覧・詳細を事前生成。`npm run build:ssg`（`SSG=1`）で `ssr: false` の静的サイト。

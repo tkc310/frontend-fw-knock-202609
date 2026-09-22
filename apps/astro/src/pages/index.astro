@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro'
 import { PostList } from '../components/PostList'
 import { fetchPosts } from '../lib/blog'
 
+export const prerender = true
+
 const posts = await fetchPosts()
 ---
 

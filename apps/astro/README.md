@@ -31,6 +31,6 @@ Astro の既定はビルド時プリレンダー（SSG）です。リクエス�
 | --- | --- | --- |
 | SSG（既定） | `npm run build` | `output: 'static'`。`/` と `/posts/:id` は静的 HTML |
 | 部分 SSR | 既定ビルドのまま `/live` | `export const prerender = false`。アダプタ付きでそのページだけ SSR |
-| 全ページ SSR | `npm run build:ssr` | `ASTRO_OUTPUT=server` で `output: 'server'`。`node dist/server/entry.mjs`（`npm start`） |
+| サーバー出力 + 静的ページ | `npm run build:ssr` | `ASTRO_OUTPUT=server`。`/` と `/posts/:id` は `prerender = true` のまま SSG。`/live` だけ SSR。`npm start` |
 
 `output: 'static'` のままアダプタを入れると、静的ページを残しつつ `prerender = false` のページだけサーバーが必要になります。アダプタなしでは `/live` はビルドできません。
