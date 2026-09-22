@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { PostList } from '../components/PostList'
+import { fetchPosts } from '../lib/blog'
+
+export const prerender = true
+
+const posts = await fetchPosts()
+---
+
+<Layout title="記事一覧 | Astro" modeLabel="一覧は SSG（prerender 既定 true）">
+  <PostList client:load posts={posts} />
+  <p class="muted">
+    リクエスト時SSRの比較用: <a href="/live">/live</a>
+  </p>
+</Layout>
