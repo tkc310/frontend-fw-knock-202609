@@ -2,6 +2,10 @@
 
 公式 `create astro --template minimal` を土台にしたブログです。データは [JSONPlaceholder](https://jsonplaceholder.typicode.com/) です。インタラクションは `@astrojs/react` のアイランドです。
 
+## メモ
+
+https://zenn.dev/tkc310/scraps/26735a7ca4ce2e#comment-2f4756915f57aa
+
 ## 画面
 
 - `/` … 記事一覧（SSG）。タイトル検索とお気に入り
