@@ -2,6 +2,10 @@
 
 公式テンプレート（`create-react-router`）を土台にしたブログです。データは [JSONPlaceholder](https://jsonplaceholder.typicode.com/) です。
 
+## メモ
+
+https://zenn.dev/tkc310/scraps/26735a7ca4ce2e#comment-16b0c576331968
+
 ## 画面
 
 - `/` … 記事一覧。タイトル検索とお気に入り（クライアント状態）
