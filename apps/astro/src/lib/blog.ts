@@ -24,7 +24,7 @@ export function toPostSummaries(posts: BlogPostEntry[]): BlogPostSummary[] {
   return posts.map((post) => ({
     id: post.id,
     title: post.data.title,
-    body: post.body,
+    body: post.body ?? '',
   }))
 }
 

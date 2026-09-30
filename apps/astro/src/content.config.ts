@@ -6,7 +6,7 @@ import { z } from 'astro/zod'
 const commentSchema = z.object({
   id: z.number(),
   name: z.string(),
-  email: z.string().email(),
+  email: z.string(),
   body: z.string(),
 })
 
