@@ -2,6 +2,10 @@
 
 公式 CLI（`create-start-app`）の最小テンプレートを土台にしたブログです。データは [JSONPlaceholder](https://jsonplaceholder.typicode.com/) です。
 
+## メモ
+
+https://zenn.dev/tkc310/scraps/26735a7ca4ce2e#comment-d1e2ccd9cff5b9
+
 ## 画面
 
 - `/` … 記事一覧。タイトル検索とお気に入り（クライアント状態）
