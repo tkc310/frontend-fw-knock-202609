@@ -1,47 +1,43 @@
 ---
+import { render } from 'astro:content'
 import Layout from '../../layouts/Layout.astro'
 import { CommentsToggle } from '../../components/CommentsToggle'
-import {
-  fetchAuthor,
-  fetchComments,
-  fetchPost,
-  fetchPosts,
-  parsePostId,
-} from '../../lib/blog'
+import { getPost, getPosts, parsePostId, type BlogPostEntry } from '../../lib/blog'
 
 export const prerender = true
 
 export async function getStaticPaths() {
-  const posts = await fetchPosts()
+  const posts = await getPosts()
   return posts.map((post) => ({
-    params: { id: String(post.id) },
+    params: { id: post.id },
+    props: { post },
   }))
 }
 
+type Props = {
+  post?: BlogPostEntry
+}
+
 const postId = parsePostId(Astro.params.id)
-if (postId === null) {
+const postFromProps = Astro.props.post
+const post = postFromProps ?? (postId === null ? undefined : await getPost(postId))
+
+if (post === undefined) {
   return Astro.redirect('/')
 }
 
-const post = await fetchPost(postId)
-if (post === null) {
-  return Astro.redirect('/')
-}
-
-const [comments, author] = await Promise.all([
-  fetchComments(post.id),
-  fetchAuthor(post.userId),
-])
+const { Content } = await render(post)
+const { authorName, authorUsername, comments } = post.data
 ---
 
-<Layout title={`${post.title} | Astro`} modeLabel="詳細は getStaticPaths による SSG">
+<Layout title={`${post.data.title} | Astro`} modeLabel="詳細は getStaticPaths による SSG">
   <a class="back-link" href="/">← 一覧へ</a>
   <article class="card">
-    <p class="muted">
-      {author === null ? '不明な著者' : `${author.name} (@${author.username})`}
-    </p>
-    <h1>{post.title}</h1>
-    <p>{post.body}</p>
+    <p class="muted">{`${authorName} (@${authorUsername})`}</p>
+    <h1>{post.data.title}</h1>
+    <div class="post-body">
+      <Content />
+    </div>
   </article>
   <CommentsToggle client:load comments={comments} />
 </Layout>

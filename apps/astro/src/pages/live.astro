@@ -1,11 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import { PostList } from '../components/PostList'
-import { fetchPosts } from '../lib/blog'
+import { getPosts, toPostSummaries } from '../lib/blog'
 
 export const prerender = false
 
-const posts = await fetchPosts()
+const posts = toPostSummaries(await getPosts())
 const renderedAt = new Date().toISOString()
 ---
 
@@ -13,6 +13,8 @@ const renderedAt = new Date().toISOString()
   title="ライブ一覧 | Astro"
   modeLabel={`prerender = false の SSR（描画時刻 ${renderedAt}）`}
 >
-  <p class="muted">このページはリクエストごとに JSONPlaceholder を取り直します。</p>
+  <p class="muted">
+    記事データはビルド時の Content Collections です。このページだけリクエストごとに HTML を組み立てます。
+  </p>
   <PostList client:load posts={posts} />
 </Layout>

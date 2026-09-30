@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 type PostSummary = {
-  id: number
+  id: string
   title: string
   body: string
 }
@@ -12,7 +12,7 @@ type Props = {
 
 export function PostList({ posts }: Props) {
   const [query, setQuery] = useState('')
-  const [favorites, setFavorites] = useState<number[]>([])
+  const [favorites, setFavorites] = useState<string[]>([])
 
   const keyword = query.trim().toLowerCase()
   const filtered =
@@ -20,7 +20,7 @@ export function PostList({ posts }: Props) {
       ? posts
       : posts.filter((post) => post.title.toLowerCase().includes(keyword))
 
-  function toggleFavorite(id: number) {
+  function toggleFavorite(id: string) {
     setFavorites((current) =>
       current.includes(id)
         ? current.filter((item) => item !== id)
